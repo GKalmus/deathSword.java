@@ -3,5 +3,6 @@ Text- based dungeon crawler. Also comes with cringe name
 
 
 ## Autorid
-**GKalmus** - Gert Kalmus\n
+**GKalmus** - Gert Kalmus
+
 **laaspere** - Lauri Laaspere
