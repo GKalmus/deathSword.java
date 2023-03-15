@@ -1,5 +1,8 @@
-# deathSword.java
-Text- based dungeon crawler. Also comes with cringe name
+# Death Sword
+Terminalis töötav tekstipõhine mäng. 
+
+## Eesmärk
+Eesmärk on teha arvuti programmeerimiskeeles nimega Javaga mäng. 
 
 
 ## Autorid
