@@ -11,7 +11,7 @@ public class Player{
         this.level = 1;
         this.xp = 0;
         this.health = 100;
-        this.attack = 1;
+        this.attack = 2;
     }
 
     Player(int l, int x, int h, int a) {
@@ -52,7 +52,6 @@ public class Player{
         levelUp();
         maxHealth();
         this.floor = 1;
-        this.dead = false;
     }
 
     public void damage(int dmg){
@@ -61,5 +60,20 @@ public class Player{
             dead = true;
             newStart();
         }
+    }
+    public boolean getDead() {
+        return dead;
+    }
+
+    public void setDead() {
+        this.dead = false;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getHealth() {
+        return health;
     }
 }
