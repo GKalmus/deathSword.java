@@ -21,6 +21,14 @@ public class Player{
         this.attack = a;
     }
 
+    public int getFloor() {
+        return floor;
+    }
+
+    public void setFloor(int floor) {
+        this.floor = floor;
+    }
+
     public void addXp(int x){
         this.xp += x;
     }
