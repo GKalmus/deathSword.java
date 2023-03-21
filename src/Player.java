@@ -1,5 +1,6 @@
 public class Player{
     private boolean dead;
+    private int floor;
     private int level;
     private int xp;
     private int health;
@@ -31,13 +32,19 @@ public class Player{
         }
     }
 
-    public void maxHealth(){
+    public void addAttack(int a){
+        this.attack += a;
+    }
 
+    public void maxHealth(){
+        this.health = level*level*2;
     }
 
     public void newStart(){
         levelUp();
         maxHealth();
+        this.floor = 1;
+        this.dead = false;
     }
 
     public void damage(int dmg){
