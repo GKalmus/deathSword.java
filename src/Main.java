@@ -74,7 +74,7 @@ public class Main {
             } else {
                 floor = 0;
                 koll.setHealth(randInt(1, 30));
-                koll.setAttack(randInt(1, 4));
+                koll.setAttack(randInt(1, 2));
                 koll.setDead(false);
                 player.newStart();
             }
