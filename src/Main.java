@@ -28,20 +28,24 @@ public class Main {
         String[] kollid = {"Kratt", "Vanapagan", "Raudmees"};
 
         while (gaming){
-            System.out.printf("MÄNGIJA: %s, HP: %d,  LVL: %d, ATK: %d, XP: %d\n", playerName, player.getHealth(), player.getLevel(), player.getAttack(), player.getXp());
-            System.out.printf("------------------------------------\nKOLETIS: %s,\t HP: %d,\t KORRUS: %d,\t ATK: %d\n\n\n", kollid[suvaline], koll.getHealth(), floor, koll.getAttack());
+            System.out.println("========================================================================\n");
+            System.out.printf("MÄNGIJA: %s, HP: %d,  LVL: %d, ATK: %d, XP: %d\n\n", playerName, player.getHealth(), player.getLevel(), player.getAttack(), player.getXp());
+            System.out.println("------------------------------------------------------------------------\n");
+            System.out.printf("KOLETIS: %s, HP: %d, KORRUS: %d, ATK: %d\n\n", kollid[suvaline], koll.getHealth(), floor, koll.getAttack());
+            System.out.println("========================================================================\n");
             while(!player.isDead()){
-                
+
 
                 pAtk = player.strike();
                 koll.damage(pAtk);
-                System.out.printf("MÄNGIJA: %s,\t HP: %d\nDMG: %d\n\n", playerName, player.getHealth(), pAtk);
+                System.out.printf("MÄNGIJA: %s, HP: %d\nDMG: %d\n\n", playerName, player.getHealth(), pAtk);
 
                 TimeUnit.SECONDS.sleep(2);
 
                 if (koll.isDead()){
                     suvaline = randInt(0 ,kollid.length -1); // varieerib kollide nimesi
                     floor++;
+
                     koll.setHealth(randInt(floor*floor, floor*floor*10));
                     koll.setAttack(randInt(floor, floor*2));
                     koll.setDead(false);
@@ -49,13 +53,17 @@ public class Main {
                     player.addXp(randInt(floor*floor, floor*floor*10));
 
                     System.out.println("Koll tapetud!\n");
-                    System.out.printf("MÄNGIJA: %s, HP: %d,  LVL: %d, ATK: %d, XP: %d\n", playerName, player.getHealth(), player.getLevel(), player.getAttack(), player.getXp());
-                    System.out.printf("------------------------------------\nKOLETIS: %s,\t HP: %d,\t KORRUS: %d,\t ATK: %d\n\n", kollid[suvaline], koll.getHealth(), floor, koll.getAttack());
+                    System.out.println("========================================================================\n");
+                    System.out.printf("MÄNGIJA: %s, HP: %d, LVL: %d, ATK: %d, XP: %d\n\n", playerName, player.getHealth(), player.getLevel(), player.getAttack(), player.getXp());
+                    System.out.println("------------------------------------------------------------------------\n");
+                    System.out.printf("KOLETIS: %s, HP: %d, KORRUS: %d, ATK: %d\n\n", kollid[suvaline], koll.getHealth(), floor, koll.getAttack());
+                    System.out.println("========================================================================\n");
+
                     TimeUnit.SECONDS.sleep(2);
                 }else {
                     kAtk = koll.strike();
                     player.damage(kAtk);
-                    System.out.printf("KOLETIS: %s,\t HP: %d\nDMG: %d\n\n", kollid[suvaline], koll.getHealth(), kAtk);
+                    System.out.printf("KOLETIS: %s, HP: %d\nDMG: %d\n\n", kollid[suvaline], koll.getHealth(), kAtk);
                     TimeUnit.SECONDS.sleep(2);
                 }
             }
@@ -65,6 +73,9 @@ public class Main {
                 gaming = false;
             } else {
                 floor = 0;
+                koll.setHealth(randInt(1, 30));
+                koll.setAttack(randInt(1, 4));
+                koll.setDead(false);
                 player.newStart();
             }
         }
