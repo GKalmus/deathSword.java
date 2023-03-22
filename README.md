@@ -2,7 +2,7 @@
 Terminalis töötav tekstipõhine mäng. 
 
 ## Eesmärk
-Eesmärk on teha arvuti programmeerimiskeeles nimega Javaga mäng. 
+Eesmärk on teha programmeerimiskeeles nimega Javaga mäng. 
 
 
 ## Autorid
