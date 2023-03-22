@@ -1,6 +1,9 @@
 public class Player{
+    public static double randInt(int min, int max){
+        return Math.random() * (max - min) + min ;
+    }
+
     private boolean dead;
-    private int floor;
     private int level;
     private int xp;
     private int health;
@@ -10,7 +13,7 @@ public class Player{
     Player(){
         this.level = 1;
         this.xp = 0;
-        this.health = 100;
+        this.health = 20;
         this.attack = 2;
     }
 
@@ -21,52 +24,54 @@ public class Player{
         this.attack = a;
     }
 
-    public int getFloor() {
-        return floor;
-    }
-
-    public void setFloor(int floor) {
-        this.floor = floor;
-    }
 
     public void addXp(int x){
         this.xp += x;
     }
 
     public void levelUp(){
-        while (this.xp >= (this.level*this.level*100)){
-            this.xp -= this.level*this.level*100;
+        while (this.xp >= (this.level*this.level*10)){
+            this.xp -= this.level*this.level*10;
             this.level += 1;
+            this.attack += 1;
         }
     }
 
-    public void addAttack(int a){
-        this.attack += a;
-    }
-
     public void maxHealth(){
-        this.health = level*level*2;
+        this.health = level*level*20;
     }
 
     public void newStart(){
         levelUp();
         maxHealth();
-        this.floor = 1;
+        this.dead = false;
     }
 
     public void damage(int dmg){
         this.health -= dmg;
         if (health <= 0) {
-            dead = true;
-            newStart();
+            this.dead = true;
         }
     }
-    public boolean getDead() {
-        return dead;
+
+    public int getLevel() {
+        return level;
     }
 
-    public void setDead() {
-        this.dead = false;
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int strike(){
+        return (int) (this.attack*randInt(1, 4));
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public boolean isDead() {
+        return dead;
     }
 
     public int getAttack() {

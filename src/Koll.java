@@ -1,29 +1,55 @@
 public class Koll {
-
-    private int kollDamage;
-
-    private int kollHealt;
-
-    public Koll(Player player) {
-        this.kollDamage = Main.randInt(1, 2*player.getFloor()+10);
-        this.kollHealt = Main.randInt(1, 2*player.getFloor()+10);
+    public static double randInt(int min, int max){
+        return (int) (Math.random() * (max - min) + min) ;
     }
 
-    public void resetKoll(Player player){
-        this.kollDamage = Main.randInt(1, 2*player.getFloor());
-        this.kollHealt = Main.randInt(1, 2*player.getFloor());
+    private int attack;
+    private int health;
+    private boolean dead;
+
+
+    Koll() {
+        this.attack = 1;
+        this.health = 10;
+        this.dead = false;
     }
 
-
-    public int getKollDamage() {
-        return kollDamage;
+    public void reset(){
+        this.attack = 1;
+        this.health = 10;
+        this.dead = false;
     }
 
-    public int getKollHealt() {
-        return kollHealt;
+    public boolean isDead() {
+        return dead;
     }
 
-    public void setKollHealt(int damage) {
-        this.kollHealt -= damage;
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
+
+    public int strike(){
+        return (int) (this.attack*randInt(1, 4));
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public void damage(int damage){
+        this.health -= damage;
+        this.dead = this.health <= 0;
     }
 }

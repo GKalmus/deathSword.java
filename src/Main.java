@@ -1,53 +1,75 @@
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
+    public static int randInt(int min, int max){
+        return (int) (Math.random() * (max - min) + min) ;
+    }
 
     public static void main(String[] args) throws InterruptedException {
         boolean gaming = true;
-        Scanner input = new Scanner(System.in);
-        System.out.println("Tere tulemast Death Swordi!");
-        System.out.println("Sisesta oma nimi:");
-        String playerName = input.nextLine();
+        int floor = 1;
+        int suvaline = 0;
+        int pAtk;
+        int kAtk;
+
         Player player = new Player();
+
+        System.out.print("Tere tulemast Death Swordi!\n");
+        System.out.print("Sisesta oma nimi: ");
+
+        Scanner input = new Scanner(System.in);
+        String playerName = input.nextLine();
+
         System.out.println("Alustame võitlusega");
-        int kollcounter = 1;
-        Koll koll = new Koll(player);
+
+        Koll koll = new Koll();
+        String[] kollid = {"Kratt", "Vanapagan", "Raudmees"};
 
         while (gaming){
-            System.out.println(player.getAttack());
-            System.out.println(player.getHealth());
-            while(!player.getDead()){
-                System.out.println("Ilmub koll nr " + kollcounter);
-                System.out.println(playerName +" ründab, tegi: " + player.getAttack() + " punkti kahju kollile");
-                koll.setKollHealt(player.getAttack());
+            System.out.printf("MÄNGIJA: %s, HP: %d,  LVL: %d, ATK: %d, XP: %d\n", playerName, player.getHealth(), player.getLevel(), player.getAttack(), player.getXp());
+            System.out.printf("------------------------------------\nKOLETIS: %s,\t HP: %d,\t KORRUS: %d,\t ATK: %d\n\n\n", kollid[suvaline], koll.getHealth(), floor, koll.getAttack());
+            while(!player.isDead()){
+                
+
+                pAtk = player.strike();
+                koll.damage(pAtk);
+                System.out.printf("MÄNGIJA: %s,\t HP: %d\nDMG: %d\n\n", playerName, player.getHealth(), pAtk);
+
                 TimeUnit.SECONDS.sleep(2);
-                if (koll.getKollHealt()<=0){
-                    koll.resetKoll(player);
-                    kollcounter++;
-                    System.out.println("Koll tapetud!");
+
+                if (koll.isDead()){
+                    suvaline = randInt(0 ,kollid.length -1); // varieerib kollide nimesi
+                    floor++;
+                    koll.setHealth(randInt(floor*floor, floor*floor*10));
+                    koll.setAttack(randInt(floor, floor*2));
+                    koll.setDead(false);
+
+                    player.addXp(randInt(floor*floor, floor*floor*10));
+
+                    System.out.println("Koll tapetud!\n");
+                    System.out.printf("MÄNGIJA: %s, HP: %d,  LVL: %d, ATK: %d, XP: %d\n", playerName, player.getHealth(), player.getLevel(), player.getAttack(), player.getXp());
+                    System.out.printf("------------------------------------\nKOLETIS: %s,\t HP: %d,\t KORRUS: %d,\t ATK: %d\n\n", kollid[suvaline], koll.getHealth(), floor, koll.getAttack());
                     TimeUnit.SECONDS.sleep(2);
                 }else {
-                    player.damage(koll.getKollDamage());
-                    System.out.println("Koll tegi " + koll.getKollDamage() + " punkti kahju mängijale.");
+                    kAtk = koll.strike();
+                    player.damage(kAtk);
+                    System.out.printf("KOLETIS: %s,\t HP: %d\nDMG: %d\n\n", kollid[suvaline], koll.getHealth(), kAtk);
                     TimeUnit.SECONDS.sleep(2);
                 }
             }
-            System.out.println(playerName + " sai surma, alustame uuesti?Y/N");
+            System.out.printf("%s sai surma...\nAlustame uuesti? Y/N  ", playerName);
             String sisend = input.nextLine();
-            if (sisend.equals("N") || sisend.equals("n"))
+            if (Objects.equals(sisend, "N") || Objects.equals(sisend, "n")){
                 gaming = false;
-            player.setDead();
-            player.addXp(kollcounter*10);
-            kollcounter = 0;
-
+            } else {
+                floor = 0;
+                player.newStart();
+            }
         }
-
         System.out.println("Aitäh mängimast");
     }
 
-    public static int randInt(int min, int max){
-        return (int)(Math.random() * ((max - min) + 1)) + min;
-    }
 
 }
