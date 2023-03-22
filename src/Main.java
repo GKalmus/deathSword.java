@@ -3,37 +3,49 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-    public static int randInt(int min, int max){
-        return (int) (Math.random() * (max - min) + min) ;
+    private static int floor = 1;
+    private static int suvaline = 0;
+
+    private static Player player;
+    private static Koll koll;
+
+    private static final String[] kollid = {"Kratt", "Vanapagan", "Raudmees"};
+
+    private static String playerName;
+
+    public static void väljasta() { // Väljastab mängija seisundi ja vastase seisundi
+        System.out.println("========================================================================\n");
+        System.out.printf("MÄNGIJA: %s, HP: %d,  LVL: %d, ATK: %d, XP: %d\n\n", playerName, player.getHealth(), player.getLevel(), player.getAttack(), player.getXp());
+        System.out.println("------------------------------------------------------------------------\n");
+        System.out.printf("KOLETIS: %s, HP: %d, KORRUS: %d, ATK: %d\n\n", kollid[suvaline], koll.getHealth(), floor, koll.getAttack());
+        System.out.println("========================================================================\n");
+    }
+
+    public static int randInt(int min, int max) {
+        return (int) (Math.random() * (max - min + 1) + min);
     }
 
     public static void main(String[] args) throws InterruptedException {
         boolean gaming = true;
-        int floor = 1;
-        int suvaline = 0;
         int pAtk;
         int kAtk;
 
-        Player player = new Player();
+        player = new Player();
 
         System.out.print("Tere tulemast Death Swordi!\n");
         System.out.print("Sisesta oma nimi: ");
 
         Scanner input = new Scanner(System.in);
-        String playerName = input.nextLine();
+        playerName = input.nextLine();
 
         System.out.println("Alustame võitlusega");
 
-        Koll koll = new Koll();
-        String[] kollid = {"Kratt", "Vanapagan", "Raudmees"};
+        koll = new Koll();
 
-        while (gaming){
-            System.out.println("========================================================================\n");
-            System.out.printf("MÄNGIJA: %s, HP: %d,  LVL: %d, ATK: %d, XP: %d\n\n", playerName, player.getHealth(), player.getLevel(), player.getAttack(), player.getXp());
-            System.out.println("------------------------------------------------------------------------\n");
-            System.out.printf("KOLETIS: %s, HP: %d, KORRUS: %d, ATK: %d\n\n", kollid[suvaline], koll.getHealth(), floor, koll.getAttack());
-            System.out.println("========================================================================\n");
-            while(!player.isDead()){
+
+        while (gaming) {
+            väljasta();
+            while (!player.isDead()) {
 
 
                 pAtk = player.strike();
@@ -42,34 +54,34 @@ public class Main {
 
                 TimeUnit.SECONDS.sleep(2);
 
-                if (koll.isDead()){
-                    suvaline = randInt(0 ,kollid.length -1); // varieerib kollide nimesi
+                if (koll.isDead()) { // Kui koll saab surma
+                    suvaline = randInt(0, kollid.length - 1); // varieerib kollide nimesi
                     floor++;
 
-                    koll.setHealth(randInt(floor*floor, floor*floor*10));
-                    koll.setAttack(randInt(floor, floor*2));
+                    koll.setHealth(randInt(floor * floor, floor * floor * 10));
+                    koll.setAttack(randInt(floor, floor * 2));
                     koll.setDead(false);
 
-                    player.setXp(randInt(floor*floor, floor*floor*10));
+                    player.setXp(randInt(floor * floor, floor * floor * 10));
 
                     System.out.println("Koll tapetud!\n");
-                    System.out.println("========================================================================\n");
-                    System.out.printf("MÄNGIJA: %s, HP: %d, LVL: %d, ATK: %d, XP: %d\n\n", playerName, player.getHealth(), player.getLevel(), player.getAttack(), player.getXp());
-                    System.out.println("------------------------------------------------------------------------\n");
-                    System.out.printf("KOLETIS: %s, HP: %d, KORRUS: %d, ATK: %d\n\n", kollid[suvaline], koll.getHealth(), floor, koll.getAttack());
-                    System.out.println("========================================================================\n");
+
+                    väljasta();
 
                     TimeUnit.SECONDS.sleep(2);
-                }else {
+                } else {
                     kAtk = koll.strike();
                     player.damage(kAtk);
                     System.out.printf("KOLETIS: %s, HP: %d\nDMG: %d\n\n", kollid[suvaline], koll.getHealth(), kAtk);
                     TimeUnit.SECONDS.sleep(2);
                 }
             }
+
             System.out.printf("%s sai surma...\nAlustame uuesti? Y/N  ", playerName);
             String sisend = input.nextLine();
-            if (Objects.equals(sisend, "N") || Objects.equals(sisend, "n")){
+            System.out.print("\n");
+
+            if (Objects.equals(sisend, "N") || Objects.equals(sisend, "n")) {
                 gaming = false;
             } else {
                 floor = 0;

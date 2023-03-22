@@ -1,10 +1,10 @@
-public class Player extends Olend{
+public class Player extends Olend {
 
     private int level;
     private int xp;
 
 
-    Player(){
+    Player() {
         this.level = 1;
         this.xp = 0;
         this.health = 20;
@@ -31,31 +31,28 @@ public class Player extends Olend{
         return xp;
     }
 
-    public void setXp(int x){
+    public void setXp(int x) {
         this.xp += x;
     }
 
 
-
-    public void levelUp(){
-        while (this.xp >= (this.level*this.level*10)){
-            this.xp -= this.level*this.level*10;
+    public void levelUp() {
+        while (this.xp >= (this.level * this.level * 10)) {
+            this.xp -= this.level * this.level * 10;
             this.level += 1;
             this.attack += 1;
         }
     }
 
-    public void maxHealth(){
-        this.health = level*level*20;
+    public void maxHealth() {
+        this.health = level * level * 20;
     }
 
-    public void newStart(){
+    public void newStart() {
         levelUp();
         maxHealth();
         this.dead = false;
     }
-
-
 
 
 }

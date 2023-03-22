@@ -35,16 +35,16 @@ public class Olend {
 
     // Funktsioonid
 
-    public static double randInt(int min, int max){
-        return (int) (Math.random() * (max - min) + min) ;
+    public static double randInt(int min, int max) {
+        return (int) (Math.random() * (max - min + 1) + min);
     }
 
-    public void damage(int damage){
+    public void damage(int damage) {
         this.health -= damage;
         this.dead = this.health <= 0;
     }
 
-    public int strike(){
-        return (int) (this.attack*randInt(1, 4));
+    public int strike() {
+        return (int) (this.attack * randInt(1, 4));
     }
 }
