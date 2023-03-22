@@ -11,21 +11,11 @@ public class Player extends Olend {
         this.attack = 2;
     }
 
-    Player(int l, int x, int h, int a) {
-        this.level = l;
-        this.xp = x;
-        this.health = h;
-        this.attack = a;
-    }
-
     // Isendi väljade get- ja set-
     public int getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
 
     public int getXp() {
         return xp;
