@@ -6,8 +6,6 @@ public class Olend {
     protected boolean dead;
 
     // Isendiväljade get- ja set-
-
-
     public int getHealth() {
         return health;
     }
@@ -34,7 +32,6 @@ public class Olend {
 
 
     // Funktsioonid
-
     public static double randInt(int min, int max) {
         return (int) (Math.random() * (max - min + 1) + min);
     }

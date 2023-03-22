@@ -1,9 +1,9 @@
 public class Player extends Olend {
-
+    // Isendi väljad
     private int level;
     private int xp;
 
-
+    // Konstrukctorid
     Player() {
         this.level = 1;
         this.xp = 0;
@@ -18,7 +18,7 @@ public class Player extends Olend {
         this.attack = a;
     }
 
-
+    // Isendi väljade get- ja set-
     public int getLevel() {
         return level;
     }
@@ -35,7 +35,7 @@ public class Player extends Olend {
         this.xp += x;
     }
 
-
+    // funktsioonid
     public void levelUp() {
         while (this.xp >= (this.level * this.level * 10)) {
             this.xp -= this.level * this.level * 10;
