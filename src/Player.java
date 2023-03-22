@@ -1,13 +1,7 @@
-public class Player{
-    public static double randInt(int min, int max){
-        return Math.random() * (max - min) + min ;
-    }
+public class Player extends Olend{
 
-    private boolean dead;
     private int level;
     private int xp;
-    private int health;
-    private int attack;
 
 
     Player(){
@@ -25,9 +19,23 @@ public class Player{
     }
 
 
-    public void addXp(int x){
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int x){
         this.xp += x;
     }
+
+
 
     public void levelUp(){
         while (this.xp >= (this.level*this.level*10)){
@@ -47,38 +55,7 @@ public class Player{
         this.dead = false;
     }
 
-    public void damage(int dmg){
-        this.health -= dmg;
-        if (health <= 0) {
-            this.dead = true;
-        }
-    }
 
-    public int getLevel() {
-        return level;
-    }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
 
-    public int strike(){
-        return (int) (this.attack*randInt(1, 4));
-    }
-
-    public int getXp() {
-        return xp;
-    }
-
-    public boolean isDead() {
-        return dead;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public int getHealth() {
-        return health;
-    }
 }

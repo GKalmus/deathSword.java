@@ -50,7 +50,7 @@ public class Main {
                     koll.setAttack(randInt(floor, floor*2));
                     koll.setDead(false);
 
-                    player.addXp(randInt(floor*floor, floor*floor*10));
+                    player.setXp(randInt(floor*floor, floor*floor*10));
 
                     System.out.println("Koll tapetud!\n");
                     System.out.println("========================================================================\n");
