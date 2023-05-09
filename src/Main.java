@@ -1,3 +1,5 @@
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +16,8 @@ public class Main {
 
     private static String playerName;
 
+    private static String gameslot = "Slot1"; //gamesloti jaoks kui on soov implementeerida
+
     // Väljastab mängija seisundi ja vastase seisundi
     public static void väljasta() {
         System.out.println("========================================================================\n");
@@ -28,7 +32,29 @@ public class Main {
         return (int) (Math.random() * (max - min + 1) + min);
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    //mängija info salvestamiseks
+    public static void savePlayerInfo() throws IOException {
+        String gameslot = Main.gameslot;
+        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(gameslot+".dat"))){
+            dos.writeUTF(Main.playerName);
+            dos.writeInt(player.getLevel());
+            dos.writeInt(player.getXp());
+            dos.writeInt(player.getHealth());
+            dos.writeInt(player.getAttack());
+        }
+    }
+    //mängija info lugemiseks
+    public static void loadPlayerInfo() throws IOException{
+        String gameslot = Main.gameslot;
+        try (DataInputStream dis = new DataInputStream(new FileInputStream(gameslot+".dat"))){
+            Main.playerName = dis.readUTF();
+            player.setLevel(dis.readInt());
+            player.setXp(dis.readInt());
+            player.setHealth(dis.readInt());
+            player.setAttack(dis.readInt());
+        }
+    }
+    public static void main(String[] args) throws InterruptedException, IOException {
         boolean gaming = true;
         int pAtk;
         int kAtk;
@@ -42,7 +68,6 @@ public class Main {
         playerName = input.nextLine();
 
         System.out.println("Alustame võitlusega");
-
         koll = new Koll();
 
         // Mäng
@@ -119,5 +144,4 @@ public class Main {
         System.out.println("Aitäh mängimast");
     }
 
-
-}
+}//Main

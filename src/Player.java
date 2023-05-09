@@ -1,3 +1,5 @@
+
+
 public class Player extends Olend {
     // Isendi väljad
     private int level;
@@ -14,6 +16,9 @@ public class Player extends Olend {
     // Isendi väljade get- ja set-
     public int getLevel() {
         return level;
+    }
+    public void setLevel(int level) {
+        this.level = level;
     }
 
 
