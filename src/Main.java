@@ -111,6 +111,8 @@ public class Main {
                     // Koll ründab mängijat
                     kAtk = koll.strike();
                     player.damage(kAtk);
+                    //playeri strikeCounti suurendamine 1-võrra;
+                    player.addStrikeCount();
 
                     // Näitab kolli seisundit ning väljastab ka, kui palju haiget tegi koll mängijale
                     System.out.printf("KOLETIS: %s, HP: %d\nDMG: %d\n\n", kollid[suvaline], koll.getHealth(), kAtk);

@@ -5,12 +5,15 @@ public class Player extends Olend {
     private int level;
     private int xp;
 
+    private int strikeCount;
+
     // Konstrukctorid
     Player() {
         this.level = 1;
         this.xp = 0;
         this.health = 20;
         this.attack = 2;
+        this.strikeCount=10;
     }
 
     // Isendi väljade get- ja set-
@@ -28,6 +31,14 @@ public class Player extends Olend {
 
     public void setXp(int x) {
         this.xp += x;
+    }
+
+    public int getStrikeCount() {
+        return strikeCount;
+    }
+
+    public void addStrikeCount() {
+        this.strikeCount++;
     }
 
     // funktsioonid
@@ -48,6 +59,27 @@ public class Player extends Olend {
         maxHealth();
         this.dead = false;
     }
+
+    public int heavyAttack(){
+        if (strikeCount>=3){
+            strikeCount-=3;
+            return (int) (this.attack * randInt(2, 7));
+        }else
+            return 0; //võib ka mingi erindi väljastada vms
+    }
+
+    public int swingAttack(){
+        if (strikeCount>=3){
+            strikeCount-=2;
+            return (int) (this.attack * randInt(1, 5));
+        }else
+            return 0;
+    }
+
+    public int noAttack(){
+        return 0;
+    }
+
 
 
 }
