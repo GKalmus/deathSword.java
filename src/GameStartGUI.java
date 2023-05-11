@@ -86,7 +86,7 @@ public class GameStartGUI extends JFrame {
         }
 
     public static void savePlayerInfo(Player player,String gameslot) throws IOException {
-        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(gameslot+".dat"))){
+        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream("src/savefiles/"+gameslot+".dat"))){
             dos.writeInt(player.getLevel());
             dos.writeInt(player.getXp());
             dos.writeInt(player.getHealth());
@@ -95,7 +95,7 @@ public class GameStartGUI extends JFrame {
     }
 
     public static void loadPlayerInfo(Player player,String gameslot) throws IOException{
-        try (DataInputStream dis = new DataInputStream(new FileInputStream(gameslot+".dat"))){
+        try (DataInputStream dis = new DataInputStream(new FileInputStream("src/savefiles/"+gameslot+".dat"))){
             player.setLevel(dis.readInt());
             player.setXp(dis.readInt());
             player.setHealth(dis.readInt());
