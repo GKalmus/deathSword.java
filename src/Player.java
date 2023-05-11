@@ -3,6 +3,8 @@ public class Player extends Olend {
     private int level;
     private int xp;
 
+
+
     // Konstruktorid
     Player() {
         this.level = 1;
@@ -16,6 +18,9 @@ public class Player extends Olend {
     // Level
     public int getLevel() {
         return level;
+    }
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     // XP

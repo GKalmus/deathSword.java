@@ -1,9 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
 
 
 public class GameStartGUI extends JFrame {
     private final JTextField nimi;
+    private static String gameslot;
+
+    public static String getGameslot() {
+        return gameslot;
+    }
 
     public GameStartGUI() {
         // Jframe, ÄRA NÄPI MUIDU MAAILMALÕPP
@@ -12,6 +18,7 @@ public class GameStartGUI extends JFrame {
         setSize(400, 300);
         getContentPane().setBackground(Color.BLACK);
         setLayout(new GridBagLayout());
+        setLocationRelativeTo(null);
 
         // Pealkiri
         JLabel pealkiri = new JLabel("Deathsword");
@@ -19,6 +26,9 @@ public class GameStartGUI extends JFrame {
         pealkiri.setFont(new Font("Arial", Font.BOLD, 24));
 
         // Tekstiväli
+        JLabel sisestus = new JLabel("Sisesta oma nimi:");
+        sisestus.setForeground(Color.WHITE);
+        sisestus.setFont(new Font("Arial", Font.ITALIC, 16));
         nimi = new JTextField(20);
         nimi.setForeground(Color.WHITE);
         nimi.setBackground(Color.GRAY);
@@ -28,16 +38,27 @@ public class GameStartGUI extends JFrame {
         algusNupp.setForeground(Color.WHITE);
         algusNupp.setBackground(Color.BLACK);
         algusNupp.addActionListener(e -> {
-            // Mängija -- siia saab panna save faili
-            Player player = new Player();
-
             // Vaatab, kas inimene sisestas nime
-            if (nimi.getText().isEmpty()){
+            try{
+                if (nimi.getText().isEmpty()) {
+                    throw new NimipuuduErind("Nimi puudu!");
+                }
+            } catch (NimipuuduErind ex) {
+                //kui kasutaja unustas nime sisestada, paneme default nime
+                System.out.println(ex.getMessage());
                 nimi.setText("Kalevipoeg");
+            }
+            Player player = new Player();
+            try{
+                loadPlayerInfo(player,nimi.getText());
+            }catch (IOException ex){
+                System.out.println(ex.getMessage());
+                System.out.println("Ei ole save faili");
             }
 
             // Alustab mängu
             GameGUI gameGUI = new GameGUI(nimi.getText(), player);
+            gameslot = nimi.getText();
             gameGUI.setVisible(true);
             dispose(); // Sulgeb alguse
         });
@@ -51,12 +72,34 @@ public class GameStartGUI extends JFrame {
         add(pealkiri, constraints);
 
         constraints.gridy = 1;
+        constraints.weighty = 0.6;
+        add(sisestus, constraints);
+
+        constraints.gridy = 2;
         constraints.weighty = 0.1;
         add(nimi, constraints);
 
-        constraints.gridy = 2;
+        constraints.gridy = 3;
         constraints.weighty = 0.6;
         add(algusNupp, constraints);
+        }
+
+    public static void savePlayerInfo(Player player,String gameslot) throws IOException {
+        try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(gameslot+".dat"))){
+            dos.writeInt(player.getLevel());
+            dos.writeInt(player.getXp());
+            dos.writeInt(player.getHealth());
+            dos.writeInt(player.getAttack());
+        }
     }
 
-}
+    public static void loadPlayerInfo(Player player,String gameslot) throws IOException{
+        try (DataInputStream dis = new DataInputStream(new FileInputStream(gameslot+".dat"))){
+            player.setLevel(dis.readInt());
+            player.setXp(dis.readInt());
+            player.setHealth(dis.readInt());
+            player.setAttack(dis.readInt());
+        }
+    }
+
+    }//GameStartGUI
