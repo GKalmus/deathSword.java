@@ -8,4 +8,9 @@ public class Koll extends Olend {
         this.dead = false;
     }
 
+    @Override
+    public String toString() {
+        return ("HP: " + this.getHealth() + ", ATK: " + this.getAttack());
+    }
+
 }

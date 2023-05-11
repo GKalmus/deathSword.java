@@ -6,26 +6,27 @@ public class Olend {
     protected boolean dead;
 
     // Isendiväljade get- ja set-
+
+    // Elud
     public int getHealth() {
         return health;
     }
-
     public void setHealth(int health) {
         this.health = health;
     }
 
+    // Löögijõud
     public int getAttack() {
         return attack;
     }
-
     public void setAttack(int attack) {
         this.attack = attack;
     }
 
+    // Kas on surnud?
     public boolean isDead() {
         return dead;
     }
-
     public void setDead(boolean dead) {
         this.dead = dead;
     }

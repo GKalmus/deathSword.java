@@ -1,9 +1,9 @@
 public class Player extends Olend {
-    // Isendi väljad
+    // Isendiväljad
     private int level;
     private int xp;
 
-    // Konstrukctorid
+    // Konstruktorid
     Player() {
         this.level = 1;
         this.xp = 0;
@@ -11,16 +11,17 @@ public class Player extends Olend {
         this.attack = 2;
     }
 
-    // Isendi väljade get- ja set-
+    // Isendiväljade get- ja set-
+
+    // Level
     public int getLevel() {
         return level;
     }
 
-
+    // XP
     public int getXp() {
         return xp;
     }
-
     public void setXp(int x) {
         this.xp += x;
     }
@@ -45,4 +46,8 @@ public class Player extends Olend {
     }
 
 
+    @Override
+    public String toString() {
+        return ("HP: " + this.getHealth() + ", ATK: " + this.getAttack()  + ", LVL:" + this.getLevel());
+    }
 }
