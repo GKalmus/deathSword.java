@@ -10,7 +10,7 @@ public class Koll extends Olend {
 
     @Override
     public String toString() {
-        return ("HP: " + this.getHealth() + ", ATK: " + this.getAttack());
+        return (String.format("<html><DIV align=\"right\">%s :HP <br>%s :ATK</DIV></html>", this.health, this.getAttack()));
     }
 
 }

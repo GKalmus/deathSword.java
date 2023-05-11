@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +11,7 @@ public class GameGUI extends JFrame {
     private final JLabel playerLabel;
     private final JLabel kollLabel;
 
-    private final JLabel playerImageLabel; //mängija pilt
     private final JLabel kollImageLabel; //Kolli pilt
-
-    private final JPanel playerPanel;
-    private final JPanel kollPanel;
 
     private final List<ImageIcon> kollImages;
 
@@ -61,14 +56,16 @@ public class GameGUI extends JFrame {
         kollImages.add(new ImageIcon("src/images/lendav ollus.png"));
 
         //Mängija pilt
-        playerImageLabel = new JLabel(playerImageIcon);
+        //mängija pilt
+        JLabel playerImageLabel = new JLabel(playerImageIcon);
         kollImageLabel = new JLabel(kollImages.get(0));
 
 
         // Jframe
         setTitle("Deathsword");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
+        setSize(600, 300);
+        setMinimumSize(new Dimension(600, 300));
         getContentPane().setBackground(Color.BLACK);
         setLayout(new BorderLayout());
 
@@ -80,27 +77,27 @@ public class GameGUI extends JFrame {
         add(korrusLabel, BorderLayout.NORTH); // Tõelised õed-vennad elavad ikka Põhja Nabal
 
         // Mängija silt
-        playerLabel = new JLabel(String.format("<html>%s: <br>%s</html>", playerName, player));
+        playerLabel = new JLabel(String.format("<html><u>%s</u><br>%s</html>", playerName, player));
         playerLabel.setForeground(Color.WHITE);
         playerLabel.setHorizontalAlignment(SwingConstants.LEFT);
         playerLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         add(playerLabel, BorderLayout.WEST);
 
         //Mängija paneel
-        playerPanel = new JPanel(new BorderLayout());
+        JPanel playerPanel = new JPanel(new BorderLayout());
         playerPanel.setBackground(Color.BLACK);
         playerPanel.add(playerImageLabel, BorderLayout.WEST);
         playerPanel.add(playerLabel, BorderLayout.CENTER);
 
         // Kolli silt
-        kollLabel = new JLabel(String.format("<html><DIV align=\"right\">%s: <br>%s</DIV></html>", kollName, koll));
+        kollLabel = new JLabel(String.format("<html><DIV align=\"right\"><u>%s</u><br>%s</DIV></html>", kollName, koll));
         kollLabel.setForeground(Color.WHITE);
         kollLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         kollLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         add(kollLabel, BorderLayout.EAST);
 
         //Kolli paneel
-        kollPanel = new JPanel(new BorderLayout());
+        JPanel kollPanel = new JPanel(new BorderLayout());
         kollPanel.setBackground(Color.BLACK);
         kollPanel.add(kollImageLabel, BorderLayout.EAST);
         kollPanel.add(kollLabel, BorderLayout.CENTER);
@@ -140,7 +137,7 @@ public class GameGUI extends JFrame {
         try{
             GameStartGUI.savePlayerInfo(player,GameStartGUI.getGameslot());
         }catch (IOException e){
-            System.out.println(e); //ei tee midagi erindiga
+            System.out.println(e.getMessage()); //ei tee midagi erindiga
         }
     }
 
@@ -179,8 +176,8 @@ public class GameGUI extends JFrame {
         kollHP = koll.getHealth();// Ära puutu
         playerHP = player.getHealth();// Ära puutu
         // Ära puutu
-        playerLabel.setText(String.format("<html>%s: <br>%s</html>", playerName, player));// Ära puutu
-        kollLabel.setText(String.format("<html><DIV align=\"right\">%s: <br>%s</DIV></html>", kollName, koll));// Ära puutu
+        playerLabel.setText(String.format("<html><u>%s</u><br>%s</html>", playerName, player));// Ära puutu
+        kollLabel.setText(String.format("<html><DIV align=\"right\"><u>%s</u><br>%s</DIV></html>", kollName, koll));// Ära puutu
     }
 
 

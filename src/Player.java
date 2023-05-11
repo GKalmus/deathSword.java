@@ -53,6 +53,6 @@ public class Player extends Olend {
 
     @Override
     public String toString() {
-        return ("HP: " + this.getHealth() + ", ATK: " + this.getAttack()  + ", LVL:" + this.getLevel());
+        return (String.format("<html>HP: %s<br>ATK: %s<br>LVL: %s<br>XP: %s</DIV></html>", this.health, this.getAttack(), this.getLevel(), this.getXp()));
     }
 }

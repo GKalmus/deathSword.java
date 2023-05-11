@@ -15,7 +15,8 @@ public class GameStartGUI extends JFrame {
         // Jframe, ÄRA NÄPI MUIDU MAAILMALÕPP
         setTitle("Deathsword");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
+        setSize(600, 300);
+        setMinimumSize(new Dimension(600, 300));
         getContentPane().setBackground(Color.BLACK);
         setLayout(new GridBagLayout());
         setLocationRelativeTo(null);
