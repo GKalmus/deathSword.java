@@ -4,7 +4,7 @@ Tere tulemast mängu "DeathSword: Hukatuse Mõõk"! Astu sisse selle põnevasse 
 # Kirjeldus
 DeathSword viib Sind põnevale seiklusele, kus Sinu klikid määravad Sinu Saatuse. Võitle erinevate koletistega ning arenda oma oskusi. Läbi ohktlikke koopaid, et saavutada uusi korruseid ning jõuda üha lähemale Hukatuse Mõõga saladustele. Kuid ole ettevaatlik! Iga otsus võib olla elu ja surma küsimus. Kurjuse väed on alati valvel ning Sinu klikid ja otsused peavad olema kiired ja strateegilised, et ellu jääda. Kasutades oma oskusi, võimeid ja õnne, pead saama tõeliseks DeathSwordi meistisk ja võitma kurjuse jõudude üle.
 
-## Eesmärk
+# Eesmärk
 Mängu eesmärk on viia oma kangelane läbi põnevate lahingute ja tulekivide. Kogu kogemuspunkte ja taset, et muuta enda kangelane tugevamaks ja võimasamaks. Võitle ägedate Eesti mütoloogia tegelaste vastu ning lahenda keerukaid mõistatusi.
 
 # Arendus 
