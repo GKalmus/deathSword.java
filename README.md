@@ -1,5 +1,5 @@
 # Death Sword
-Terminalis töötav tekstipõhine mäng. 
+Java GUI põhine mäng
 
 ## Eesmärk
 Eesmärk on teha programmeerimiskeeles nimega Javaga mäng. 
